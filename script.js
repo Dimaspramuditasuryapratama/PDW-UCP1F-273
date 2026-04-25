@@ -105,4 +105,4 @@ window.addEventListener('storage', function(e) {
         if (document.getElementById('membersTableBody')) renderMembersTable();
         updateIndexDisplay();
     }
-});
+}); 
