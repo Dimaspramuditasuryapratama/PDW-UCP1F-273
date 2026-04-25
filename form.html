@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Community | Form Anggota</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><i class="fas fa-code"></i><span>TechCommunity</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="form.html" class="active"><i class="fas fa-user-plus"></i> Form Anggota</a></li>
+                <li><a href="multimedia.html"><i class="fas fa-photo-video"></i> Multimedia</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <div class="form-container">
+                <h2><i class="fas fa-edit"></i> Pendaftaran Anggota Baru</h2>
+                <p>Isi data diri Anda untuk bergabung dengan Tech Community</p>
+
+                <form id="memberForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                        <input type="text" id="fullname" placeholder="Contoh: Ahmad Fauzi" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-code-branch"></i> Bidang Keahlian</label>
+                        <select id="field" required>
+                            <option value="">Pilih bidang...</option>
+                            <option>Frontend Developer</option>
+                            <option>Backend Engineer</option>
+                            <option>UI/UX Designer</option>
+                            <option>DevOps Engineer</option>
+                            <option>Data Scientist</option>
+                            <option>Mobile Developer</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-save"></i> Daftar Sekarang</button>
+                </form>
+
+                <div id="formMessage" class="alert" style="display: none;"></div>
+            </div>
+
+            <!-- TABEL DATA ANGGOTA (menampilkan semua data dari array) -->
+            <div style="margin-top: 3rem;">
+                <div class="section-title">
+                    <h2><i class="fas fa-table"></i> Daftar Anggota Tech Community</h2>
+                    <p>Seluruh anggota yang sudah terdaftar (disimpan di array JavaScript)</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Nama</th><th>Email</th><th>Bidang</th><th>Aksi</th></tr>
+                        </thead>
+                        <tbody id="membersTableBody">
+                            <tr><td colspan="4">Memuat data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container"><p>&copy; 2026 Tech Community | Data disimpan sementara di array JavaScript</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        renderMembersTable();
+        
+        document.getElementById('memberForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const field = document.getElementById('field').value;
+            
+            if (addMember(fullname, email, field)) {
+                document.getElementById('formMessage').className = 'alert alert-success';
+                document.getElementById('formMessage').innerHTML = '<i class="fas fa-check-circle"></i> Pendaftaran berhasil! Anggota baru ditambahkan.';
+                document.getElementById('formMessage').style.display = 'block';
+                document.getElementById('memberForm').reset();
+                renderMembersTable();
+                updateIndexDisplay(); // update jika index terbuka di tab lain (storage event juga otomatis)
+                setTimeout(() => {
+                    document.getElementById('formMessage').style.display = 'none';
+                }, 3000);
+            } else {
+                document.getElementById('formMessage').className = 'alert alert-error';
+                document.getElementById('formMessage').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Gagal menambahkan, pastikan semua field terisi.';
+                document.getElementById('formMessage').style.display = 'block';
+            }
+        });
+        
+        // sinkronisasi antar tab
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'techCommunityMembers') {
+                loadMembersFromStorage();
+                renderMembersTable();
+                updateIndexDisplay();
+            }
+        });
+    </script>
+</body>
+</html>
