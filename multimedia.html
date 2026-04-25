@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Community | Multimedia</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><i class="fas fa-code"></i><span>TechCommunity</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="form.html"><i class="fas fa-user-plus"></i> Form Anggota</a></li>
+                <li><a href="multimedia.html" class="active"><i class="fas fa-photo-video"></i> Multimedia</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-photo-video"></i> Galeri & Multimedia Komunitas</h2>
+                <p>Konten visual dan audio untuk mengenal lebih dekat kegiatan Tech Community</p>
+            </div>
+
+            <!-- GALERI GAMBAR -->
+            <div class="multimedia-grid">
+                <div class="media-card">
+                    <img src="https://picsum.photos/id/0/400/250" alt="Kegiatan Workshop">
+                    <div class="media-caption">Workshop Frontend 2025</div>
+                </div>
+                <div class="media-card">
+                    <img src="https://picsum.photos/id/26/400/250" alt="Hackathon bersama">
+                    <div class="media-caption">Hackathon "CodeFest"</div>
+                </div>
+                <div class="media-card">
+                    <img src="https://picsum.photos/id/91/400/250" alt="Meetup anggota">
+                    <div class="media-caption">Tech Meetup Bulanan</div>
+                </div>
+                <div class="media-card">
+                    <img src="https://picsum.photos/id/155/400/250" alt="Kolaborasi proyek">
+                    <div class="media-caption">Sesi Kolaborasi Proyek</div>
+                </div>
+            </div>
+
+            <!-- KONTEN AUDIO INTERAKTIF -->
+            <div class="audio-section">
+                <h3><i class="fas fa-headphones"></i> Podcast Komunitas</h3>
+                <p>Dengarkan sambutan dari founder Tech Community</p>
+                <div class="audio-player">
+                    <audio id="communityAudio" controls>
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                    <div class="audio-controls">
+                        <button id="playBtn" class="btn btn-sm"><i class="fas fa-play"></i> Play</button>
+                        <button id="pauseBtn" class="btn btn-sm"><i class="fas fa-pause"></i> Pause</button>
+                        <button id="stopBtn" class="btn btn-sm"><i class="fas fa-stop"></i> Stop</button>
+                    </div>
+                </div>
+                <p class="audio-note"><i class="fas fa-info-circle"></i> Contoh audio interaktif menggunakan JavaScript (event klik).</p>
+            </div>
+
+            <!-- VIDEO YOUTUBE (embed) -->
+            <div class="video-section">
+                <h3><i class="fab fa-youtube"></i> Video Perkenalan Komunitas</h3>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p style="text-align: center; margin-top: 0.5rem;">Tonton kegiatan seru Tech Community!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container"><p>&copy; 2026 Tech Community | Konten multimedia interaktif</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Interaksi audio sederhana (event klik)
+        const audio = document.getElementById('communityAudio');
+        if (audio) {
+            document.getElementById('playBtn')?.addEventListener('click', () => audio.play());
+            document.getElementById('pauseBtn')?.addEventListener('click', () => audio.pause());
+            document.getElementById('stopBtn')?.addEventListener('click', () => { audio.pause(); audio.currentTime = 0; });
+        }
+    </script>
+</body>
+</html>
